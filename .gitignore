@@ -1,0 +1,19 @@
+# Binaries
+/bin/
+/dist/
+*.exe
+*.test
+*.out
+
+# Temporary files
+/tmp/
+*.tmp
+
+# Coverage
+coverage.out
+coverage.html
+
+# Editor files
+.vscode/
+.idea/
+.DS_Store
