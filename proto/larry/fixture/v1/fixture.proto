@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package larry.fixture.v1;
+
+option go_package = "github.com/Larry-Systems-Inc/larry-grpc-fixture/gen/fixturev1;fixturev1";
+
+service FixtureService {
+  rpc Unary(UnaryRequest) returns (UnaryResponse);
+
+  rpc ServerStream(StreamRequest) returns (stream StreamMessage);
+
+  rpc ClientStream(stream StreamMessage) returns (StreamSummary);
+
+  rpc BidiStream(stream StreamMessage) returns (stream StreamMessage);
+
+  rpc Fail(FailureRequest) returns (UnaryResponse);
+
+  rpc Delay(DelayRequest) returns (UnaryResponse);
+}
+
+message UnaryRequest {
+  string message = 1;
+}
+
+message UnaryResponse {
+  string message = 1;
+  int64 server_unix_ms = 2;
+}
+
+message StreamRequest {
+  string message = 1;
+  int32 count = 2;
+  int32 interval_ms = 3;
+}
+
+message StreamMessage {
+  int32 sequence = 1;
+  string message = 2;
+}
+
+message StreamSummary {
+  int32 received = 1;
+  string joined = 2;
+}
+
+message FailureRequest {
+  string code = 1;
+  string message = 2;
+}
+
+message DelayRequest {
+  int32 delay_ms = 1;
+  string message = 2;
+}
